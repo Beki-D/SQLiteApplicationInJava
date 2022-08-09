@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     Button btn_add, btn_view;
     EditText et_name, et_age;
     SwitchCompat switch_active;
+    SwitchCompat switch_filter;
     ListView customer_list;
     //TextView resultShow;
 
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         et_age = findViewById(R.id.et_age);
         et_name = findViewById(R.id.et_name);
         switch_active = findViewById(R.id.switch_active);
+        switch_filter = findViewById(R.id.filter);
         customer_list = findViewById(R.id.customer_list);
         //resultShow = findViewById(R.id.resultShow);
 
@@ -83,10 +85,22 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Deleted: " + clickedCustomer.toString(), Toast.LENGTH_LONG).show();
             }
         });
+
+        switch_filter.setOnClickListener((v) -> {
+            Toast.makeText(MainActivity.this, "Filter clicked: " + switch_filter.isChecked(), Toast.LENGTH_SHORT).show();
+            DataBaseHandler dataBaseHandler = new DataBaseHandler(MainActivity.this);
+            if (switch_filter.isChecked()){
+                ShowFilteredCustomersOnListVIew(dataBaseHandler);
+            }
+        });
     }
 
     private void ShowCustomersOnListVIew(DataBaseHandler dataBaseHelper2) {
         customerArrayAdapter = new ArrayAdapter<CustomerModel>(MainActivity.this, android.R.layout.simple_list_item_1, dataBaseHelper2.getAllData());
+        customer_list.setAdapter(customerArrayAdapter);
+    }
+    private void ShowFilteredCustomersOnListVIew(DataBaseHandler dataBaseHelper2) {
+        customerArrayAdapter = new ArrayAdapter<CustomerModel>(MainActivity.this, android.R.layout.simple_list_item_1, dataBaseHelper2.getFilteredChecked());
         customer_list.setAdapter(customerArrayAdapter);
     }
 }

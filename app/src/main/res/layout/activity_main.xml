@@ -27,10 +27,10 @@
         android:id="@+id/et_age"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:ems="10"
         android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="40dp"
+        android:ems="10"
         android:hint="Age"
         android:inputType="textPersonName"
         android:minHeight="48dp"
@@ -44,7 +44,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:checked="true"
         android:minHeight="48dp"
         android:padding="5dp"
         android:text="Active customer"
@@ -91,5 +90,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/btn_view" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:minHeight="48dp"
+        android:text="Filter checked"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.365"
+        app:layout_constraintStart_toEndOf="@+id/switch_active"
+        app:layout_constraintTop_toBottomOf="@+id/et_age" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

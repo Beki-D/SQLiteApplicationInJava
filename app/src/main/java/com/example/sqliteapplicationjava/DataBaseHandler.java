@@ -62,6 +62,31 @@ public class DataBaseHandler extends SQLiteOpenHelper {
             return false;
         }
     }
+
+    public List<CustomerModel> getFilteredChecked() {
+        List<CustomerModel> returnChecked = new ArrayList<>();
+        String query_SelectChecked = "SELECT * FROM " + CUSTOMER_TABLE + " WHERE ACTIVE_CUSTOMER=1";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(query_SelectChecked, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int customerID = cursor.getInt(0);
+                String customerName = cursor.getString(1);
+                int customerAge = cursor.getInt(2);
+                boolean customerActive = cursor.getInt(3) == 1 ? true: false;
+
+                CustomerModel newCustomers = new CustomerModel(customerID, customerName, customerAge, customerActive);
+                returnChecked.add(newCustomers);
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return returnChecked;
+    }
+
     public List<CustomerModel> getAllData() {
         List<CustomerModel> returnList = new ArrayList<>();
         String query_SelectAll = "SELECT * FROM " + CUSTOMER_TABLE;
